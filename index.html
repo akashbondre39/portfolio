@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akash Bondre | Data Analyst Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --primary: #00f3ff; /* Cyber Cyan */
+            --secondary: #bd00ff; /* Neon Purple */
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(189, 0, 255, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.08) 0%, transparent 25%);
+        }
+
+        /* Animated Background Mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(50px); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary);
+            border-radius: 4px;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        span.highlight {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header / Nav */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            border: 1px solid var(--primary);
+            padding: 5px 15px;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            font-size: 1.5rem;
+            margin-left: 20px;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 30px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            letter-spacing: 4px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--primary);
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+        }
+
+        /* Skills Section */
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            border-left: 5px solid var(--secondary);
+            padding-left: 20px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.1);
+        }
+
+        .skill-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 5px 12px;
+            font-size: 0.9rem;
+            border-radius: 2px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-top: 2px solid var(--primary);
+            padding: 30px;
+            position: relative;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            transform: scale(1.02);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(400px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+        }
+
+        .project-links {
+            margin-top: auto;
+            z-index: 1;
+            position: relative;
+        }
+
+        .project-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border-bottom: 1px solid transparent;
+            transition: 0.3s;
+        }
+
+        .project-links a:hover {
+            border-bottom: 1px solid var(--primary);
+            text-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Certificates Section */
+        .cert-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .cert-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            padding: 20px;
+            border-left: 3px solid var(--secondary);
+            transition: 0.3s;
+        }
+
+        .cert-item:hover {
+            background: rgba(189, 0, 255, 0.1);
+            padding-left: 30px;
+        }
+
+        .cert-item a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .cert-item i {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 100px;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero h2 { font-size: 1.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-mesh"></div>
+
+    <div class="container">
+        <nav>
+            <div class="logo">AKASH.DATA</div>
+            <div class="social-links">
+                <a href="https://github.com/akashbondre39" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/akashbondre27" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:akashbondre39@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </nav>
+
+        <section class="hero visible" id="home">
+            <p style="color: var(--primary); letter-spacing: 2px;">// SYSTEM ONLINE</p>
+            <h1>Akash Bondre</h1>
+            <h2>Data Analyst</h2>
+            <p>
+                Transforming complex datasets into actionable business intelligence. 
+                Specialized in visualization, statistical analysis, and driving data-driven growth strategies.
+            </p>
+            <a href="#projects" class="btn">View Analytics <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical <span class="highlight">Arsenal</span></h2>
+            <div class="skills-grid">
+                
+                <div class="skill-card">
+                    <h3><i class="fas fa-chart-line"></i> Data Analysis</h3>
+                    <div class="tag-container">
+                        <span class="tag">Python</span>
+                        <span class="tag">SQL</span>
+                        <span class="tag">Advanced Excel</span>
+                        <span class="tag">Google Sheets</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3><i class="fas fa-chart-pie"></i> Data Visualization</h3>
+                    <div class="tag-container">
+                        <span class="tag">Power BI</span>
+                        <span class="tag">Tableau</span>
+                        <span class="tag">Interactive Dashboards</span>
+                        <span class="tag">Business Insights</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3><i class="fas fa-database"></i> Database Mgmt</h3>
+                    <div class="tag-container">
+                        <span class="tag">MySQL</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">BigQuery</span>
+                        <span class="tag">ETL</span>
+                    </div>
+                </div>
+
+                <div class="skill-card">
+                    <h3><i class="fas fa-users-cog"></i> Product Analytics</h3>
+                    <div class="tag-container">
+                        <span class="tag">Mixpanel</span>
+                        <span class="tag">Google Analytics</span>
+                        <span class="tag">A/B Testing</span>
+                        <span class="tag">Hypothesis Testing</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Deployed <span class="highlight">Projects</span></h2>
+            <div class="projects-grid" id="project-container">
+                
+                <div class="project-card">
+                    <div>
+                        <h3>E-Commerce Platform Analysis</h3>
+                        <p>End-to-end data analysis of $2.19M sales data, driving visibility on revenue growth and margin erosion.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://akashbondre39.github.io/Beauty-Skincare-Co.---E-Commerce-Platform-Analysis/" target="_blank">LIVE DASHBOARD <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>Supply Chain Optimization</h3>
+                        <p>Logistics and Inventory Optimization for D2C Products. Reduced stockouts and improved delivery SLA.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://akashbondre39.github.io/Supply-Chain-Management---Logistics-and-Management/" target="_blank">LIVE DASHBOARD <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>Smartphone Market Decoding</h3>
+                        <p>Sales, Trends & Customer Insights analysis for the competitive smartphone market sector.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://akashbondre39.github.io/Decoding-the-Smartphone-Market-Sales-Trends-Customer-Insights/" target="_blank">LIVE DASHBOARD <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>Credit Risk Analysis</h3>
+                        <p>Deep dive into Customer Risk and Transactional Analysis to mitigate financial exposure.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://akashbondre39.github.io/Customer-Risk-and-Transactional-Analysis/" target="_blank">LIVE DASHBOARD <i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>User Journey Optimization</h3>
+                        <p>Reducing Drop Offs & Boosting Conversions and Retentions for B2C Products.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/akashbondre39/User-Journey-Optimization-Reducing-Drop-Offs-Boosting-Conversions-and-Retentions-for-B2C-Product" target="_blank">VIEW REPO <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>Customer Profitability Analysis</h3>
+                        <p>Understanding what drives customer profitability using advanced segmentation.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/akashbondre39/Customer-Profitability-Analysis---Understanding-What-Drives-Customer-Profitability" target="_blank">VIEW REPO <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div>
+                        <h3>Marketing Effectiveness ROI</h3>
+                        <p>Optimization for Consumer Credit Card Acquisition and Engagement.</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/akashbondre39/Marketing-Effectiveness-and-ROI-Optimization-for-Consumer-Credit-Card-Acquisition-and-Engagement" target="_blank">VIEW REPO <i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="certificates">
+            <h2 class="section-title">Verified <span class="highlight">Certificates</span></h2>
+            <div class="cert-list">
+                <div class="cert-item">
+                    <a href="https://www.hackerrank.com/certificates/iframe/105fef26afa2" target="_blank">HackerRank SQL (Advanced) Certificate</a>
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="cert-item">
+                    <a href="https://drive.google.com/file/d/1MCl9WY33NW5MVRnk2Vg76P9oo0_out6h/view" target="_blank">Product Analytics with Mixpanel by Product School</a>
+                    <i class="fas fa-medal"></i>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Akash Bondre.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Scroll Reveal Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Mouse Hover Glow Effect for Cards
+        document.getElementById("project-container").onmousemove = e => {
+            for(const card of document.getElementsByClassName("project-card")) {
+                const rect = card.getBoundingClientRect(),
+                      x = e.clientX - rect.left,
+                      y = e.clientY - rect.top;
+
+                card.style.setProperty("--mouse-x", `${x}px`);
+                card.style.setProperty("--mouse-y", `${y}px`);
+            };
+        }
+    </script>
+</body>
+</html>
