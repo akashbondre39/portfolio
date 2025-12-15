@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analytics Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --accent-cyan: #00f3ff;
+            --accent-purple: #bd00ff;
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Ambient Background Glow */
+        .glow-orb {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(189, 0, 255, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            top: -200px;
+            left: -200px;
+            z-index: -1;
+            animation: float 10s ease-in-out infinite alternate;
+        }
+        
+        .glow-orb.secondary {
+            top: auto;
+            bottom: -200px;
+            left: auto;
+            right: -200px;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, rgba(0,0,0,0) 70%);
+            animation-delay: 5s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 4rem;
+        }
+
+        .logo {
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            letter-spacing: -1px;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 6rem;
+        }
+
+        h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border: 1px solid var(--accent-purple);
+            color: var(--accent-purple);
+            border-radius: 50px;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Bento Grid Layout */
+        .grid-section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .grid-section-title::after {
+            content: '';
+            height: 1px;
+            background: var(--card-border);
+            flex-grow: 1;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 6rem;
+        }
+
+        /* Featured item spans 2 columns on large screens */
+        .card.featured {
+            grid-column: span 1;
+        }
+        
+        @media(min-width: 768px) {
+            .card.featured {
+                grid-column: span 2;
+            }
+        }
+
+        /* Glassmorphism Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 16px;
+            transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.05);
+        }
+
+        .card-header {
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: auto;
+        }
+
+        .tech-pill {
+            background: rgba(255,255,255,0.05);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            color: var(--text-main);
+        }
+
+        .project-link {
+            margin-top: 1.5rem;
+            display: inline-block;
+            color: var(--accent-cyan);
+            font-family: var(--font-code);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-item {
+            border: 1px solid var(--card-border);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-family: var(--font-code);
+            transition: 0.3s;
+        }
+
+        .skill-item:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: var(--accent-purple);
+        }
+
+        footer {
+            margin-top: 6rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--card-border);
+            text-align: center;
+            color: var(--text-muted);
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="glow-orb"></div>
+    <div class="glow-orb secondary"></div>
+
+    <div class="container">
+        
+        <header>
+            <div class="logo">&lt;DATA_ANALYST /&gt;</div>
+            <nav class="social-links">
+                <a href="#">GitHub</a>
+                <a href="#">LinkedIn</a>
+                <a href="#">Email</a>
+            </nav>
+        </header>
+
+        <section class="hero">
+            <span class="tag">AVAILABLE FOR WORK</span>
+            <h1 id="typewriter">Turning Raw Data<br>Into Intelligence.</h1>
+            <p>I build predictive models, interactive dashboards, and scalable data pipelines. Focusing on clarity, accuracy, and futuristic insights.</p>
+        </section>
+
+        <h2 class="grid-section-title">Selected Works</h2>
+        <div class="bento-grid">
+            
+            <article class="card featured">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <h3>E-Commerce Sales Dashboard</h3>
+                    <p>A comprehensive Power BI dashboard analyzing customer churn and quarterly revenue trends for a retail giant. Utilized SQL for data extraction and Python for predictive modeling.</p>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-pill">Power BI</span>
+                    <span class="tech-pill">SQL</span>
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">DAX</span>
+                </div>
+                <a href="#" class="project-link">View Analysis &rarr;</a>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-icon">🤖</span>
+                    <h3>Sentiment Analysis AI</h3>
+                    <p>NLP model trained on 50k+ product reviews to categorize customer feedback automatically.</p>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">TensorFlow</span>
+                    <span class="tech-pill">NLTK</span>
+                </div>
+                <a href="#" class="project-link">View Repo &rarr;</a>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-icon">📈</span>
+                    <h3>Stock Market Predictor</h3>
+                    <p>Time-series forecasting using LSTM networks to predict market trends with 85% accuracy.</p>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-pill">Python</span>
+                    <span class="tech-pill">Pandas</span>
+                    <span class="tech-pill">Keras</span>
+                </div>
+                <a href="#" class="project-link">View Repo &rarr;</a>
+            </article>
+
+            <article class="card">
+                <div class="card-header">
+                    <span class="card-icon">🕸️</span>
+                    <h3>Web Scraper & ETL Pipeline</h3>
+                    <p>Automated pipeline to scrape real-time housing data and load it into a cloud warehouse.</p>
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-pill">BeautifulSoup</span>
+                    <span class="tech-pill">AWS Glue</span>
+                    <span class="tech-pill">SQL</span>
+                </div>
+                <a href="#" class="project-link">View Repo &rarr;</a>
+            </article>
+
+        </div>
+
+        <h2 class="grid-section-title">Technical Arsenal</h2>
+        <div class="skills-grid">
+            <div class="skill-item">Python</div>
+            <div class="skill-item">SQL</div>
+            <div class="skill-item">Tableau</div>
+            <div class="skill-item">Power BI</div>
+            <div class="skill-item">Machine Learning</div>
+            <div class="skill-item">Excel / VBA</div>
+            <div class="skill-item">Git / GitHub</div>
+            <div class="skill-item">BigQuery</div>
+        </div>
+
+        <footer>
+            <p>&copy; 2025. Designed & Coded by You.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // Simple entry animation for cards
+        document.addEventListener("DOMContentLoaded", () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>
